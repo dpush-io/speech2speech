@@ -29,6 +29,7 @@
       <input :value="value" />
       <button @click="startChat">聊一聊</button>
       <br />
+      <div id="imageContainer"></div>
     </div>
     <!-- 开发环境版本，包含了有帮助的命令行警告 -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
@@ -61,6 +62,19 @@
           }
           this.ws.onmessage = (e) => {
             console.log(e.data)
+            // event.data包含了从WebSocket接收到的数据
+            var blob = new Blob([e.data], { type: 'image/jpeg' }); // 假设这里是JPEG图像格式
+            var imageUrl = URL.createObjectURL(blob);
+
+            // 创建一个新的图片元素
+            var img = new Image();
+
+            // 设置图片的src属性为Blob URL
+            img.src = imageUrl;
+
+            // 将图片元素添加到页面中的指定容器
+            var imageContainer = document.getElementById('imageContainer');
+            imageContainer.appendChild(img);
           }
           this.ws.onerror = (e) => {
             this.status = "连接已断开"

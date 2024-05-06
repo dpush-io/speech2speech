@@ -11,6 +11,7 @@ const app = new Vue({
 		recordeResult: '',
 		// ai回复结果
 		repplyResult: '',
+		value: '杨喆和何雪婷的爱情故事 ',
 	},
 	watch: {
 		isSpeak(newVal) {
@@ -39,6 +40,9 @@ const app = new Vue({
 		}
 	},
 	methods: {
+		sendMessage() {
+			this.aiWS.send(this.value)
+		},
 		startChat: function () {
 			if (this.aiWS && this.aiWS.readyState === this.aiWS.OPEN) {
 				if (this.status === "ws已连接, 录音关闭") {
@@ -70,6 +74,10 @@ const app = new Vue({
 				} else {
 					this[key] = this[key] + data.result
 				}
+			} else if (data.type === 'photo') {
+				// let blob = new Blob([data.data], { type: 'image/jpeg' }); // 假设这里是JPEG图像格式
+				// let imageUrl = URL.createObjectURL(blob);
+				this.repplyResult += `<img src="http://192.168.50.25:3003/image/${encodeURIComponent(data.fileName)}" class="image" />`
 			}
 			console.log(this.history)
 		},

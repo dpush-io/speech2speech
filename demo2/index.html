@@ -23,17 +23,23 @@
     .history > li {
       padding: 10px 5px;
     }
+    .image {
+      width: 300px;
+    }
   </style>
   <body>
     <div id="app">
       <p>{{status}}</p>
       <ul class="history">
-        <li v-for="(item, index) in history" :class="item.role">{{item.contact}}</li>
+        <li v-for="(item, index) in history" :class="item.role" v-html="item.contact"></li>
         <li class="ai" v-if="repplyResult">{{repplyResult}}</li>
         <li class="user" v-if="recordeResult">{{recordeResult}}</li>
       </ul>
+      <div id="imageContainer"></div>
       <button @click="startChat">聊一聊</button>
       <br />
+      <!-- <input :value="value" />
+      <button @click="sendMessage">聊一聊</button> -->
       <!-- <p>
         <button @click="pauseAudio">暂停</button>
         暂停播放
