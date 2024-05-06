@@ -22,7 +22,11 @@ const app = new Vue({
 			}
 		},
 	},
-	computed: {},
+	computed: {
+		serverUrl() {
+			return window.location.host.includes('127.0.0.1') ? "http://192.168.50.25:3003" : "https://rts.reportsay.cn/tospeech"
+		}
+	},
 	created() {},
 	mounted() {
 		this.recorder.onFrameRecorded = ({ isLastFrame, frameBuffer }) => {
@@ -77,13 +81,13 @@ const app = new Vue({
 			} else if (data.type === 'photo') {
 				// let blob = new Blob([data.data], { type: 'image/jpeg' }); // 假设这里是JPEG图像格式
 				// let imageUrl = URL.createObjectURL(blob);
-				this.repplyResult += `<img src="http://192.168.50.25:3003/image/${encodeURIComponent(data.fileName)}" class="image" />`
+				this.repplyResult += `<img src="${this.serverUrl}/image/${encodeURIComponent(data.fileName)}" class="image" />`
 			}
 			console.log(this.history)
 		},
 		connectSocket: function () {
 			return new Promise((resolve, reject) => {
-				const websocketUrl = window.location.host.includes('127.0.0.1') ? "ws://192.168.50.25:3003" : "wss://rts.reportsay.cn/tospeech" 
+				const websocketUrl =  window.location.host.includes('127.0.0.1') ? "ws://192.168.50.25:3003" : "wss://rts.reportsay.cn/tospeech"
 				if ("WebSocket" in window) {
 					this.aiWS = new WebSocket(websocketUrl)
 				} else if ("MozWebSocket" in window) {
