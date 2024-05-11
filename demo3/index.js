@@ -19,6 +19,7 @@ const app = new Vue({
   },
 	methods: {
 		sendMessage() {
+      console.log(this.value)
 			this.avatar.speakNext(this.value)
 		},
     load() {

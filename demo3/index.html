@@ -35,7 +35,7 @@
       <div id="imageContainer"></div>
       <!-- <button @click="startChat">聊一聊</button> -->
       <br />
-      <input :value="value" />
+      <input v-model="value" />
       <button @click="sendMessage">聊一聊</button>
       <button @click="load">重连</button>
       <button @click="stop">终止</button>
