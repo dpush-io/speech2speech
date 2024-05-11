@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    video {
+      width: 100%;
+    }
+    .ai {
+      color: #333;
+    }
+    .user {
+      text-align: right;
+      color: rgb(31, 179, 248);
+    }
+    .history {
+      list-style: none;
+      width: 50%;
+      margin: auto;
+      padding: 0;
+    }
+    .history > li {
+      padding: 10px 5px;
+    }
+    .image {
+      width: 300px;
+    }
+  </style>
+  <body>
+    <div id="app">
+      <div id="imageContainer"></div>
+      <!-- <button @click="startChat">聊一聊</button> -->
+      <br />
+      <input :value="value" />
+      <button @click="sendMessage">聊一聊</button>
+      <div id="remoteVideo"></div>
+    </div>
+    <!-- Speech SDK reference sdk. -->
+    <script src="https://aka.ms/csspeech/jsbrowserpackageraw"></script>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- 生产环境版本，优化了尺寸和速度 -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
+
+    <script src="./avatar.js"></script>
+    <script src="./index.js"></script>
+    <!-- <script src="./tts.js"></script> -->
+  </body>
+</html>
