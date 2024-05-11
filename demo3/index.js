@@ -11,9 +11,6 @@ const app = new Vue({
     this.avatar = new Avatar()
     window.addEventListener('beforeunload', (event) => {   
       this.stop()
-      const confirmationMessage = '您确定要离开本页面吗？';
-      event.returnValue = confirmationMessage; // 兼容旧版本浏览器
-      return confirmationMessage;
     });
   },
 	mounted() {},
@@ -24,6 +21,9 @@ const app = new Vue({
 		sendMessage() {
 			this.avatar.speakNext(this.value)
 		},
+    load() {
+      this.avatar.connectAvatar()
+    },
     stop() {
       this.avatar.disconnectAvatar()
     }
