@@ -25,7 +25,7 @@ class Avatar {
 		this.speechRecognizer = null
 		this.dataSources = []
 		this.messageInitiated = false
-    this.sessionActive = false
+		this.sessionActive = false
 
 		this.messages = []
 
@@ -173,6 +173,7 @@ class Avatar {
 					}, 5000) // Set session active after 5 seconds
 				}
 
+        console.log(123123123)
 				document.getElementById("remoteVideo").appendChild(videoElement)
 			}
 		}
@@ -291,5 +292,20 @@ class Avatar {
 					this.isSpeaking = false
 				}
 			})
+	}
+
+	// Disconnect from avatar service
+	disconnectAvatar = () => {
+    console.log(this.avatarSynthesizer)
+		if (this.avatarSynthesizer !== undefined) {
+			this.avatarSynthesizer.close()
+		}
+
+		if (this.speechRecognizer !== undefined) {
+			this.speechRecognizer.stopContinuousRecognitionAsync()
+			this.speechRecognizer.close()
+		}
+
+		this.sessionActive = false
 	}
 }
